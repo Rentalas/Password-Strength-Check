@@ -23,8 +23,8 @@ export enum PasswordAnnotation {
 export class PasswordStrengthCheck {
   hide:boolean = true;
   password: string = '';
-  passwordStrength: string[] = ['', '', ''];
-  passwordAnnotation: string = '';
+  passwordStrengthColor: string[] = ['', '', ''];
+  passwordAnnotation: PasswordAnnotation = PasswordAnnotation.empty;
 
   checkPassword() {
     const lengthCondition = this.password.length >= 8;
@@ -33,30 +33,33 @@ export class PasswordStrengthCheck {
     const strongCondition = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/.test(this.password);
 
     if (!this.password) {
-      this.passwordStrength = ['', '', ''];
+      this.passwordStrengthColor = ['', '', ''];
       this.passwordAnnotation = PasswordAnnotation.empty;
       return
     }
 
     if (!lengthCondition) {
-      this.passwordStrength = ['red', 'red', 'red'];
+      this.passwordStrengthColor = ['#FF0000', '#FF0000', '#FF0000'];
       this.passwordAnnotation = PasswordAnnotation.lessCharacters;
       return
     }
 
-    if (easyCondition) {
-      this.passwordStrength = ['red', '', ''];
-      this.passwordAnnotation = PasswordAnnotation.easy;
+    if (strongCondition) {
+      this.passwordStrengthColor = ['green', 'green', 'green'];
+      this.passwordAnnotation = PasswordAnnotation.strong;
+      return
     }
 
     if (mediumCondition) {
-      this.passwordStrength = ['yellow', 'yellow', ''];
+      this.passwordStrengthColor = ['#FFFF00', '#FFFF00', ''];
       this.passwordAnnotation = PasswordAnnotation.medium;
+      return
     }
 
-    if (strongCondition) {
-      this.passwordStrength = ['green', 'green', 'green'];
-      this.passwordAnnotation = PasswordAnnotation.strong;
+    if (easyCondition) {
+      this.passwordStrengthColor = ['#FF0000', '', ''];
+      this.passwordAnnotation = PasswordAnnotation.easy;
+      return
     }
   }
 }
