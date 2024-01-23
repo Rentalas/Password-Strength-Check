@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PasswordStrengthCheckComponent } from './password-strength-check/password-strength-check.component';
+import { PasswordComponent} from './password/password/password.component';
 
 const routes: Routes = [
-  {path: '', component: PasswordStrengthCheckComponent},
+  {path: '', component: PasswordComponent},
 ];
 
 @NgModule({
