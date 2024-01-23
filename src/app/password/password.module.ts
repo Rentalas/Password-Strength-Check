@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PasswordComponent } from './password/password.component';
 import { PasswordStrengthIndicatorComponent } from './password-strength-indicator/password-strength-indicator.component';
+import { PasswordStrengthService } from './password-strength.service';
 
 @NgModule({
   declarations: [PasswordComponent, PasswordStrengthIndicatorComponent],
@@ -17,6 +18,7 @@ import { PasswordStrengthIndicatorComponent } from './password-strength-indicato
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [PasswordStrengthService],
 })
 export class PasswordModule { }

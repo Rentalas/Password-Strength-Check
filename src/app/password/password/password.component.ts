@@ -1,7 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PasswordAnnotation } from '../password-strength-constants';
-import { PasswordStrengthCheckService } from '../password-strength-check.service';
+import { PasswordStrengthService } from '../password-strength.service';
 
 @Component({
   selector: 'password',
@@ -14,7 +14,6 @@ import { PasswordStrengthCheckService } from '../password-strength-check.service
       multi: true
     }
   ]
-
 })
 
 export class PasswordComponent implements ControlValueAccessor{
@@ -26,12 +25,12 @@ export class PasswordComponent implements ControlValueAccessor{
   private onChange = (password: string) => {};
   private onTouched = () => {};
 
-  constructor(private passwordStrengthCheckService: PasswordStrengthCheckService) {
+  constructor(private passwordStrengthService: PasswordStrengthService) {
   }
 
   onPasswordChange(): void {
     const password = this.passwordControl.value;
-    this.passwordAnnotation = this.passwordStrengthCheckService.checkPassword(password);
+    this.passwordAnnotation = this.passwordStrengthService.checkPassword(password);
 
     this.onChange(password);
   }
