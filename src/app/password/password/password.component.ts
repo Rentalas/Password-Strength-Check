@@ -19,7 +19,6 @@ import { PasswordStrengthService } from '../password-strength.service';
 export class PasswordComponent implements ControlValueAccessor{
   passwordControl = new FormControl('');
   hidePassword: boolean = true;
-  password: string;
   passwordAnnotation: PasswordAnnotation;
 
   private onChange = (password: string) => {};
@@ -45,6 +44,10 @@ export class PasswordComponent implements ControlValueAccessor{
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  onHideButtonClick(): void {
+    this.hidePassword = !this.hidePassword;
   }
 }
 
