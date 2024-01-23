@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { PasswordAnnotation } from '../password-strength-constants';
+import { GREEN_COLOR, PasswordAnnotation, RED_COLOR, YELLOW_COLOR } from '../password-strength-constants';
 
 @Component({
   selector: 'password-strength-indicator',
@@ -22,22 +22,22 @@ export class PasswordStrengthIndicatorComponent implements OnChanges {
     }
 
     if (this.passwordAnnotation === PasswordAnnotation.lessCharacters) {
-      this.passwordStrengthColor = ['#FF0000', '#FF0000', '#FF0000'];
+      this.passwordStrengthColor = [RED_COLOR, RED_COLOR, RED_COLOR];
       return;
     }
 
     if (this.passwordAnnotation === PasswordAnnotation.strong) {
-      this.passwordStrengthColor = ['#008000', '#008000', '#008000'];
+      this.passwordStrengthColor = [GREEN_COLOR, GREEN_COLOR, GREEN_COLOR];
       return;
     }
 
     if (this.passwordAnnotation === PasswordAnnotation.medium) {
-      this.passwordStrengthColor = ['#FFFF00', '#FFFF00', ''];
+      this.passwordStrengthColor = [YELLOW_COLOR, YELLOW_COLOR, ''];
       return;
     }
 
     if (this.passwordAnnotation === PasswordAnnotation.easy) {
-      this.passwordStrengthColor = ['#FF0000', '', ''];
+      this.passwordStrengthColor = [RED_COLOR, '', ''];
       return;
     }
   }

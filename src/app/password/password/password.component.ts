@@ -7,23 +7,24 @@ import { PasswordStrengthCheckService } from '../password-strength-check.service
   selector: 'password',
   templateUrl: './password.component.html',
   styleUrls: ['./password.component.scss'],
-  providers:[
+  providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => PasswordComponent),
-      multi: true,
+      multi: true
     }
   ]
+
 })
 
 export class PasswordComponent implements ControlValueAccessor{
-  hide: boolean = true;
   passwordControl = new FormControl('');
+  hidePassword: boolean = true;
   password: string;
   passwordAnnotation: PasswordAnnotation;
 
   private onChange = (password: string) => {};
-  private onTouched: () => void;
+  private onTouched = () => {};
 
   constructor(private passwordStrengthCheckService: PasswordStrengthCheckService) {
   }
@@ -31,12 +32,12 @@ export class PasswordComponent implements ControlValueAccessor{
   onPasswordChange(): void {
     const password = this.passwordControl.value;
     this.passwordAnnotation = this.passwordStrengthCheckService.checkPassword(password);
-    this.writeValue(password);
+
     this.onChange(password);
   }
 
-  writeValue(password: string): void {
-    this.password = password;
+  writeValue(value: string): void {
+    this.passwordControl.setValue(value);
   }
 
   registerOnChange(fn: (value: string) => void): void {

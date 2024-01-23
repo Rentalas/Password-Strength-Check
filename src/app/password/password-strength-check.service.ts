@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MINPASSWORDLENGTH, MEDIUMCONDITIONPASSWORDSTRENGTH, PasswordAnnotation, STRONGCONDITIONPASSWORDSTRENGTH } from './password-strength-constants';
+import { PasswordAnnotation, MEDIUM_CONDITION_PASSWORD_STRENGTH, STRONG_CONDITION_PASSWORD_STRENGTH, MIN_PASSWORD_LENGTH } from './password-strength-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,9 @@ export class PasswordStrengthCheckService {
   constructor() { }
 
   checkPassword(password: string): PasswordAnnotation {
-    const lengthCondition = password.length >= MINPASSWORDLENGTH;
-    const mediumCondition = MEDIUMCONDITIONPASSWORDSTRENGTH.test(password);
-    const strongCondition = STRONGCONDITIONPASSWORDSTRENGTH.test(password);
+    const lengthCondition = password.length >= MIN_PASSWORD_LENGTH;
+    const mediumCondition = MEDIUM_CONDITION_PASSWORD_STRENGTH.test(password);
+    const strongCondition = STRONG_CONDITION_PASSWORD_STRENGTH.test(password);
     let passwordAnnotation = PasswordAnnotation.easy;
 
     if (!password) {
